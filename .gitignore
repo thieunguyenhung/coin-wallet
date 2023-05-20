@@ -1,6 +1,6 @@
 .gradle
 build/
-!gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/*
 /local.gradle
 /target/
 buildSrc/out/

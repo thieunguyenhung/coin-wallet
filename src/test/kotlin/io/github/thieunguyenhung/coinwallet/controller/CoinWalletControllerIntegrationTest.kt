@@ -15,8 +15,10 @@ import io.github.thieunguyenhung.coinwallet.repository.WalletRepository
 import io.github.thieunguyenhung.coinwallet.utils.IntegrationTest
 import io.github.thieunguyenhung.coinwallet.helper.JavaInstantHelper.Companion.toInstantBy
 import io.github.thieunguyenhung.coinwallet.helper.JavaInstantHelper.Companion.toStringBy
+import io.github.thieunguyenhung.coinwallet.utils.SpringRestDocumentationConfiguration
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
+import io.restassured.specification.RequestSpecification
 import org.apache.http.HttpStatus
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.CoreMatchers.equalTo
@@ -27,6 +29,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext
+import org.springframework.restdocs.RestDocumentationContextProvider
 import java.math.BigDecimal
 import java.time.Instant
 import java.time.temporal.ChronoUnit
@@ -49,17 +52,21 @@ class CoinWalletControllerIntegrationTest {
     @Autowired
     private lateinit var walletMapper: WalletMapper
 
+    private lateinit var documentationSpec: RequestSpecification
+
     private lateinit var objectMapper: ObjectMapper
 
     private var port = 0
 
     @BeforeEach
-    fun setup() {
+    fun setup(restDocumentation: RestDocumentationContextProvider) {
         port = server.webServer.port
 
         objectMapper = ObjectMapper()
             .registerModule(JavaTimeModule())
             .registerKotlinModule()
+
+        documentationSpec = SpringRestDocumentationConfiguration.prepareDocumentationSpecification(restDocumentation)
     }
 
     @AfterEach
@@ -71,7 +78,8 @@ class CoinWalletControllerIntegrationTest {
     fun `SHOULD save a new record for GIVEN valid DepositRequest`() {
         val body = DepositRequest(datetime = Instant.now(), amount = BigDecimal(1.1))
 
-        val actualResponse = RestAssured.given()
+        val actualResponse = RestAssured.given(documentationSpec)
+            .filter(CoinWalletControllerDocHelper.POST_DEPOSIT)
             .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH")
             .contentType(ContentType.JSON)
             .body(objectMapper.writeValueAsString(body))
@@ -110,7 +118,8 @@ class CoinWalletControllerIntegrationTest {
             endDatetime = "2023-05-09T00:00:05+07:00" toInstantBy pattern
         )
 
-        val actualResponse = RestAssured.given()
+        val actualResponse = RestAssured.given(documentationSpec)
+            .filter(CoinWalletControllerDocHelper.POST_HISTORY)
             .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH")
             .contentType(ContentType.JSON)
             .body(objectMapper.writeValueAsString(body))

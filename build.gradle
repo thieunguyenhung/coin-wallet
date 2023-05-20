@@ -1,12 +1,24 @@
 import org.jetbrains.kotlin.gradle.tasks.*
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.epages:restdocs-api-spec-gradle-plugin:0.9.8'
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.7.11'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.jetbrains.kotlin.jvm' version '1.6.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id "org.asciidoctor.convert" version '2.4.0'
     id 'jacoco'
 }
+
+apply plugin: 'com.epages.restdocs-api-spec'
 
 group = 'io.github.thieunguyenhung'
 version = '0.0.1-SNAPSHOT'
@@ -14,6 +26,10 @@ sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
 }
 
 dependencies {
@@ -25,10 +41,14 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.postgresql:postgresql:42.6.0'
     implementation 'org.flywaydb:flyway-core:9.17.0'
+    implementation 'io.springfox:springfox-swagger2:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
+    testImplementation 'org.springframework.restdocs:spring-restdocs-restassured'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.rest-assured:rest-assured'
-    testImplementation 'org.mockito.kotlin:mockito-kotlin:3.2.0'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:4.1.0'
+    testImplementation 'com.epages:restdocs-api-spec-restassured:0.9.8'
 }
 
 bootRun {
@@ -39,12 +59,21 @@ jacoco {
     reportsDirectory = layout.buildDirectory.dir('JacocoReport')
 }
 
+jacocoTestReport {
+    dependsOn test
+}
+
 test {
+    outputs.dir snippetsDir
     finalizedBy jacocoTestReport
 }
 
-jacocoTestReport {
-    dependsOn test
+openapi3 {
+    server = 'localhost:8080'
+    title = 'COIN WALLET REST API'
+    description = 'This project is an example of exploring Kotlin with Spring Boot for educational and learning purposes. Please note that this is not intended for production use and should not be considered as an official endorsement or recommendation of Kotlin or Spring Boot.'
+    version = '0.1.0'
+    format = 'yaml'
 }
 
 tasks.withType(KotlinCompile) {
