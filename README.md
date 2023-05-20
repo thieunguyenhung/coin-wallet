@@ -4,7 +4,8 @@ This project is an example of exploring Kotlin with Spring Boot for educational 
 ## Features
 
 - REST Api for POST request with body
-- Validating request body with spring-boot-starter-validation and custom ConstraintValidator
+- API Documentation with `spring-restdocs-restassured` and `com.epages:restdocs-api-spec-gradle-plugin`
+- Validating request body with `spring-boot-starter-validation` and custom ConstraintValidator
 - Handle exception with ExceptionHandler for RestControllerAdvice
 - Configuring the persistence layer with JpaRepository
 - Integration tests for Controller and Repository
@@ -19,7 +20,12 @@ This project is an example of exploring Kotlin with Spring Boot for educational 
 ## Testing
 
 1. Run `./gradlew jacocoTestReport`
-2. Report can be found in "${buildDir}/JacocoReport/test/html", open `index.html` in browser to view.
+2. Open `${buildDir}/JacocoReport/test/html/index.html` in browser to view
+
+## API Documentation
+
+1. Run `./gradlew openapi3`
+2. Open `${buildDir}/api-spec/openapi3.yaml` in Swagger UI or any yaml reader for API details
 
 ## Disclaimer
 Do what ever you want, I do not accept any responsibility or liability for any errors, omissions, or damages arising from the use of this example project.
