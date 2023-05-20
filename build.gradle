@@ -64,6 +64,7 @@ jacocoTestReport {
 }
 
 test {
+    useJUnitPlatform()
     outputs.dir snippetsDir
     finalizedBy jacocoTestReport
 }
@@ -81,8 +82,4 @@ tasks.withType(KotlinCompile) {
         freeCompilerArgs = ['-Xjsr305=strict']
         jvmTarget = '1.8'
     }
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
 }
