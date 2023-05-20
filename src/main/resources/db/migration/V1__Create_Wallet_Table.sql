@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS wallet (
+    id UUID PRIMARY KEY,
+    amount NUMERIC,
+    created_at TIMESTAMP WITH TIME ZONE
+);

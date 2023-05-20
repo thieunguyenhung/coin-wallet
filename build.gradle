@@ -1,0 +1,59 @@
+import org.jetbrains.kotlin.gradle.tasks.*
+
+plugins {
+    id 'org.springframework.boot' version '2.7.11'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id 'jacoco'
+}
+
+group = 'io.github.thieunguyenhung'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.postgresql:postgresql:42.6.0'
+    implementation 'org.flywaydb:flyway-core:9.17.0'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:3.2.0'
+}
+
+bootRun {
+    systemProperty "spring.profiles.active", "local"
+}
+
+jacoco {
+    reportsDirectory = layout.buildDirectory.dir('JacocoReport')
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+}
+
+tasks.withType(KotlinCompile) {
+    kotlinOptions {
+        freeCompilerArgs = ['-Xjsr305=strict']
+        jvmTarget = '1.8'
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

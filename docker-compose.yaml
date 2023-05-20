@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:15.3
+    container_name: postgres-container
+    ports:
+      - 5418:5432
+    environment:
+      POSTGRES_USER: wallet_user
+      POSTGRES_PASSWORD: cpmOxzrjvx0Knppm6LmTgWkyPSsMMK
+      POSTGRES_DB: my_wallet
+    volumes:
+      - ./data:/var/lib/postgresql/data
