@@ -24,6 +24,12 @@ jobs:
     steps:
     - name: Checkout project sources
       uses: actions/checkout@v3
+    - name: Checkout project sources
+      uses: joshuaavalon/flyway-action@v3.0.0
+      with:
+        url: jdbc:postgresql://postgres:5432/my_wallet
+        user: wallet_user
+        password: cpmOxzrjvx0Knppm6LmTgWkyPSsMMK
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
     - name: Run build with Gradle Wrapper
