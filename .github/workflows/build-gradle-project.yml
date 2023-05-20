@@ -28,3 +28,8 @@ jobs:
       uses: gradle/gradle-build-action@v2
     - name: Run build with Gradle Wrapper
       run: ./gradlew build
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-tests-result
+        path: coin-wallet/coin-wallet/build/reports/tests/test/
