@@ -32,4 +32,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: build-tests-result
-        path: coin-wallet/coin-wallet/build/reports/tests/test/
+        path: |
+          coin-wallet/build/reports/tests/test/
+          coin-wallet/build/JacocoReport/test/html/
+          coin-wallet/build/api-spec/
