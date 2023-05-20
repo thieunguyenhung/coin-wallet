@@ -15,7 +15,7 @@ jobs:
           POSTGRES_PORT: 5432
           POSTGRES_USER: wallet_user
         ports:
-          - 5432:5432
+          - 5418:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -24,7 +24,7 @@ jobs:
     steps:
     - name: Checkout project sources
       uses: actions/checkout@v3
-    - name: Checkout project sources
+    - name: Flyway-action
       uses: joshuaavalon/flyway-action@v3.0.0
       with:
         url: jdbc:postgresql://postgres:5432/my_wallet
