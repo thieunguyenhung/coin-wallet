@@ -33,6 +33,6 @@ jobs:
       with:
         name: build-tests-result
         path: |
-          coin-wallet/build/reports/tests/test/
-          coin-wallet/build/JacocoReport/test/html/
-          coin-wallet/build/api-spec/
+          reports/tests/test/
+          JacocoReport/test/html/
+          api-spec/
