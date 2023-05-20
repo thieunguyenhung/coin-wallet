@@ -1,0 +1,18 @@
+name: Build Gradle project
+
+on:
+  push:
+
+jobs:
+  build-gradle-project:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout project sources
+      uses: actions/checkout@v3
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+    - name: Run build with Gradle Wrapper
+      run: ./gradlew build
