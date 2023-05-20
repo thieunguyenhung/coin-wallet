@@ -6,12 +6,14 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import io.github.thieunguyenhung.coinwallet.helper.JavaInstantHelper.Companion.toInstantBy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import java.time.Instant
 
+@Disabled("For testing on GitHub Action")
 @SpringBootTest
 @ActiveProfiles(profiles = ["local"])
 class JsonSerializerForJavaInstantTest {

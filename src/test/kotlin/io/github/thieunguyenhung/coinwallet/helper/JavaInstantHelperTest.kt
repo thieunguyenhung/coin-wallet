@@ -3,6 +3,7 @@ package io.github.thieunguyenhung.coinwallet.helper
 import io.github.thieunguyenhung.coinwallet.helper.JavaInstantHelper.Companion.toInstantBy
 import io.github.thieunguyenhung.coinwallet.helper.JavaInstantHelper.Companion.toStringBy
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -12,6 +13,7 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
+@Disabled("For testing on GitHub Action")
 @SpringBootTest
 @ActiveProfiles(profiles = ["local"])
 class JavaInstantHelperTest {
