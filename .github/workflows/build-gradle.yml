@@ -1,10 +1,10 @@
-name: Build Gradle project
+name: Build Gradle
 
 on:
   push:
 
 jobs:
-  build-gradle-project:
+  build-gradle:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -33,6 +33,6 @@ jobs:
       with:
         name: build-tests-result
         path: |
-          reports/tests/test/
-          JacocoReport/test/html/
-          api-spec/
+          /home/runner/work/coin-wallet/coin-wallet/build/reports/tests/test/
+          /home/runner/work/coin-wallet/coin-wallet/build/JacocoReport/test/html/
+          /home/runner/work/coin-wallet/coin-wallet/build/api-spec/

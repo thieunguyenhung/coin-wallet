@@ -1,4 +1,7 @@
 # COIN WALLET
+
+![Build Gradle](https://github.com/thieunguyenhung/coin-wallet/actions/workflows/build-gradle.yml/badge.svg)
+
 This project is an example of exploring Kotlin with Spring Boot for educational and learning purposes. Please note that this is not intended for production use and should not be considered as an official endorsement or recommendation of Kotlin or Spring Boot.
 
 ## Features
