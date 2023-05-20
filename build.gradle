@@ -67,6 +67,7 @@ test {
     useJUnitPlatform()
     outputs.dir snippetsDir
     finalizedBy jacocoTestReport
+    finalizedBy 'openapi3'
 }
 
 openapi3 {
