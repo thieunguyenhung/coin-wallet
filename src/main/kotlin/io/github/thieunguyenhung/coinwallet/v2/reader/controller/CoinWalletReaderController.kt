@@ -4,6 +4,7 @@ import io.github.thieunguyenhung.coinwallet.global.Constants
 import io.github.thieunguyenhung.coinwallet.model.HistoryLogRequest
 import io.github.thieunguyenhung.coinwallet.model.WalletDtoResponse
 import io.github.thieunguyenhung.coinwallet.v2.reader.service.WalletReaderService
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
@@ -16,7 +17,8 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping(Constants.REQUEST_MAPPING_API_PATH_V2)
-class WalletReaderController(
+@ConditionalOnProperty(name = ["wallet.enabled.reader"], havingValue = "true")
+class CoinWalletReaderController(
     private val walletReaderService: WalletReaderService
 ) {
     @PostMapping(Constants.POST_HISTORY_PATH)
