@@ -1,4 +1,4 @@
-# COIN WALLET
+# [COIN WALLET](https://github.com/thieunguyenhung/coin-wallet)
 
 ![Build Gradle](https://github.com/thieunguyenhung/coin-wallet/actions/workflows/build-gradle.yml/badge.svg)
 
