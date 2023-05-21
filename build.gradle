@@ -71,7 +71,7 @@ test {
 }
 
 openapi3 {
-    server = 'localhost:8080'
+    server = 'localhost:8080/my-wallet'
     title = 'COIN WALLET REST API'
     description = 'This project is an example of exploring Kotlin with Spring Boot for educational and learning purposes. Please note that this is not intended for production use and should not be considered as an official endorsement or recommendation of Kotlin or Spring Boot.'
     version = '0.1.0'

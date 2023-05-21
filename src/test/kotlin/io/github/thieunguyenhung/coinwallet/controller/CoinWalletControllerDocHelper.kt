@@ -2,6 +2,10 @@ package io.github.thieunguyenhung.coinwallet.controller
 
 import com.epages.restdocs.apispec.RestAssuredRestDocumentationWrapper.document
 import com.epages.restdocs.apispec.RestAssuredRestDocumentationWrapper.resourceDetails
+import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.COIN_WALLET_DOCUMENTATION_TAG_V1
+import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.POST_DEPOSIT_PATH
+import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.POST_HISTORY_PATH
+import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.REQUEST_MAPPING_API_PATH_V1
 import org.springframework.restdocs.payload.FieldDescriptor
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
@@ -9,12 +13,11 @@ import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
 import org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath
 import org.springframework.restdocs.restassured3.RestDocumentationFilter
 
-private const val DOCUMENTATION_TAG = "Coin Wallet"
-
 object CoinWalletControllerDocHelper {
     val POST_DEPOSIT: RestDocumentationFilter = document(
-        identifier = "coin-wallet/post-deposit",
-        resourceDetails = resourceDetails().description("API to deposit coin to wallet").tag(DOCUMENTATION_TAG),
+        identifier = "my-wallet$REQUEST_MAPPING_API_PATH_V1$POST_DEPOSIT_PATH",
+        resourceDetails = resourceDetails().description("API to deposit coin to wallet")
+            .tag(COIN_WALLET_DOCUMENTATION_TAG_V1),
         snippets = arrayOf(
             requestFields(
                 fieldWithPath("datetime").description("The timestamp of the deposit action performed, must be in the past or present and in format yyyy-MM-dd'T'HH:mm:ssXXX"),
@@ -29,10 +32,10 @@ object CoinWalletControllerDocHelper {
     )
 
     val POST_HISTORY: RestDocumentationFilter = document(
-        identifier = "coin-wallet/post-history",
+        identifier = "my-wallet$REQUEST_MAPPING_API_PATH_V1$POST_HISTORY_PATH",
         resourceDetails = resourceDetails()
             .description("API to log history of wallet deposit actions within a specified timestamp range")
-            .tag(DOCUMENTATION_TAG),
+            .tag(COIN_WALLET_DOCUMENTATION_TAG_V1),
         snippets = arrayOf(
             requestFields(
                 fieldWithPath("startDatetime").description("The start timestamp of history log, in format yyyy-MM-dd'T'HH:mm:ssXXX"),
