@@ -8,6 +8,7 @@ import io.github.thieunguyenhung.coinwallet.helper.JavaInstantHelper.Companion.t
 import io.github.thieunguyenhung.coinwallet.model.DepositRequest
 import io.github.thieunguyenhung.coinwallet.model.WalletDtoResponse
 import io.github.thieunguyenhung.coinwallet.utils.IntegrationTest
+import io.github.thieunguyenhung.coinwallet.v2.reader.repository.WalletReaderRepository
 import io.github.thieunguyenhung.coinwallet.v2.writer.repository.WalletWriterRepository
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
@@ -31,6 +32,9 @@ class CoinWalletWriterControllerIntegrationTest {
 
     @Autowired
     private lateinit var writerRepository: WalletWriterRepository
+
+    @Autowired
+    private lateinit var readerRepository: WalletReaderRepository
 
     @Autowired
     private lateinit var server: ServletWebServerApplicationContext
@@ -69,7 +73,7 @@ class CoinWalletWriterControllerIntegrationTest {
             .body("datetime", CoreMatchers.equalTo(body.datetime!! toStringBy pattern))
             .extract().body().jsonPath().getObject("", WalletDtoResponse::class.java)
 
-        val savedEntity = writerRepository.findById(actualResponse.id)
+        val savedEntity = readerRepository.findById(actualResponse.id)
 
         Assertions.assertThat(savedEntity).isPresent
         Assertions.assertThat(savedEntity.get()).extracting("amount").isEqualTo(body.amount)
