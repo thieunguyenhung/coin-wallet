@@ -2,7 +2,7 @@ package io.github.thieunguyenhung.coinwallet.controller
 
 import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.POST_DEPOSIT_PATH
 import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.POST_HISTORY_PATH
-import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.REQUEST_MAPPING_API_PATH
+import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.REQUEST_MAPPING_API_PATH_V1
 import io.github.thieunguyenhung.coinwallet.model.DepositRequest
 import io.github.thieunguyenhung.coinwallet.model.HistoryLogRequest
 import io.github.thieunguyenhung.coinwallet.model.WalletDtoResponse
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
 @RestController
-@RequestMapping(REQUEST_MAPPING_API_PATH)
+@RequestMapping(REQUEST_MAPPING_API_PATH_V1)
 class CoinWalletController(
     private val walletService: WalletService
 ) {

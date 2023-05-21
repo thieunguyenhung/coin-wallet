@@ -6,7 +6,7 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import io.github.thieunguyenhung.coinwallet.entity.Wallet
 import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.POST_DEPOSIT_PATH
 import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.POST_HISTORY_PATH
-import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.REQUEST_MAPPING_API_PATH
+import io.github.thieunguyenhung.coinwallet.global.Constants.Companion.REQUEST_MAPPING_API_PATH_V1
 import io.github.thieunguyenhung.coinwallet.mapper.WalletMapper
 import io.github.thieunguyenhung.coinwallet.model.DepositRequest
 import io.github.thieunguyenhung.coinwallet.model.HistoryLogRequest
@@ -80,7 +80,7 @@ class CoinWalletControllerIntegrationTest {
 
         val actualResponse = RestAssured.given(documentationSpec)
             .filter(CoinWalletControllerDocHelper.POST_DEPOSIT)
-            .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH")
+            .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH_V1")
             .contentType(ContentType.JSON)
             .body(objectMapper.writeValueAsString(body))
             .`when`()
@@ -120,7 +120,7 @@ class CoinWalletControllerIntegrationTest {
 
         val actualResponse = RestAssured.given(documentationSpec)
             .filter(CoinWalletControllerDocHelper.POST_HISTORY)
-            .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH")
+            .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH_V1")
             .contentType(ContentType.JSON)
             .body(objectMapper.writeValueAsString(body))
             .`when`()
@@ -143,7 +143,7 @@ class CoinWalletControllerIntegrationTest {
         val body = DepositRequest(datetime = Instant.now().plus(1, ChronoUnit.DAYS), amount = BigDecimal(-1.1))
 
         RestAssured.given()
-            .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH")
+            .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH_V1")
             .contentType(ContentType.JSON)
             .body(objectMapper.writeValueAsString(body))
             .`when`()
@@ -168,7 +168,7 @@ class CoinWalletControllerIntegrationTest {
         )
 
         RestAssured.given()
-            .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH")
+            .baseUri("http://localhost:$port${servletContext.contextPath}$REQUEST_MAPPING_API_PATH_V1")
             .contentType(ContentType.JSON)
             .body(objectMapper.writeValueAsString(body))
             .`when`()
